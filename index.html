@@ -11,9 +11,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Brand world taken from the logo: deep navy field, butterfly gold, parchment ring.
-     Layout: navy masthead with the mission as thesis, then one long reading column
-     interrupted by a ledger of real figures and photo bands from Atse-Fasil school. */
+  /* Original BCE look, taken from the logo: deep navy field, butterfly gold,
+     parchment pages. Layout: navy masthead with the children's portraits as
+     the centerpiece, then parchment sections with white cards. */
   --navy: #09195d;
   --navy-deep: #050f3d;
   --gold: #f3a925;
@@ -21,340 +21,355 @@
   --parchment: #fdf6ea;
   --ink: #1b2040;
   --muted: #545a78;
-  --rule: #e4dccb;
+  --line: #e4dccb;
+  --white: #ffffff;
+  --sky: var(--gold);
+  --sky-deep: var(--navy);
+  --sky-tint: var(--gold-soft);
   --font-display: "Gloock", "Georgia", "Times New Roman", serif;
   --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --radius: 8px;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body {
-  margin: 0;
-  background: var(--parchment);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 1.0625rem;
-  line-height: 1.65;
-}
+body { margin: 0; background: var(--white); color: var(--ink); font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.65; }
 img { max-width: 100%; display: block; }
-a { color: var(--navy); text-underline-offset: 3px; }
-a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
-h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.12; text-wrap: balance; margin: 0; }
-h2 { font-size: clamp(2rem, 4vw, 2.75rem); color: var(--navy); }
-h3 { font-size: 1.45rem; color: var(--navy); }
+a { color: var(--navy); }
+a:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { font-family: var(--font-display); color: var(--navy); line-height: 1.12; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.4rem, 5.2vw, 4rem); font-weight: 700; }
+h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 600; }
+h3 { font-size: 1.2rem; font-weight: 600; }
 p { margin: 0; }
 .wrap { width: min(1120px, 100% - 40px); margin-inline: auto; }
-.eyebrow {
-  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--gold); display: flex; align-items: center; gap: 10px;
-}
-.eyebrow::before { content: ""; width: 28px; height: 2px; background: currentColor; }
-.section { padding: clamp(56px, 8vw, 96px) 0; }
-.section + .section { border-top: 1px solid var(--rule); }
+.label { font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sky-deep); }
+.lead { font-size: 1.2rem; color: var(--muted); max-width: 52ch; }
+section { padding: clamp(64px, 9vw, 112px) 0; }
+main > section + section { border-top: 1px solid var(--line); }
+main > section.stats, main > section.stats + section { border-top: 0; }
+.section-head { display: grid; gap: 14px; max-width: 720px; margin-bottom: 44px; }
 
-/* Masthead */
-.masthead { background: var(--navy); color: var(--parchment); }
-.nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 0; flex-wrap: wrap; }
-.brand { display: flex; align-items: center; gap: 12px; color: var(--parchment); text-decoration: none; }
-.brand img { width: 52px; height: 52px; }
-.brand span { font-family: var(--font-display); font-size: 1.25rem; line-height: 1.1; }
-.brand small { display: block; font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-soft); }
-.nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; padding: 0; }
-.nav a { color: var(--parchment); text-decoration: none; font-size: 0.95rem; }
-.nav a:hover { color: var(--gold); }
-.nav .donate { background: var(--gold); color: var(--navy-deep); padding: 8px 16px; border-radius: 999px; font-weight: 700; }
-.nav .donate:hover { color: var(--navy-deep); background: var(--gold-soft); }
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,0.88); backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--line); }
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; flex-wrap: wrap; padding: 8px 0; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand img { width: 44px; height: 44px; }
+.brand span { font-family: var(--font-display); font-weight: 600; color: var(--navy); font-size: 1.05rem; letter-spacing: -0.01em; }
+.nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; }
+.nav ul a { display: block; padding: 8px 14px; border-radius: 999px; text-decoration: none; color: var(--ink); font-weight: 500; font-size: 0.95rem; }
+.nav ul a:hover { background: var(--sky-tint); color: var(--sky-deep); }
 
-.hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; padding: clamp(36px, 6vw, 72px) 0 clamp(56px, 8vw, 88px); }
-.hero h1 { font-size: clamp(2.5rem, 5.6vw, 4.25rem); color: #fff; }
-.hero h1 em { font-style: normal; color: var(--gold); }
-.hero .lede { margin-top: 22px; font-size: 1.2rem; color: var(--gold-soft); max-width: 34ch; }
-.hero .actions { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 14px; }
-.btn { display: inline-block; padding: 13px 24px; border-radius: 999px; font-weight: 700; text-decoration: none; }
-.btn-gold { background: var(--gold); color: var(--navy-deep); }
-.btn-gold:hover { background: var(--gold-soft); }
-.btn-line { border: 2px solid var(--gold-soft); color: var(--parchment); }
-.btn-line:hover { border-color: var(--gold); color: var(--gold); }
-.hero figure { margin: 0; position: relative; }
-.hero figure img { width: 100%; border-radius: 6px; border: 6px solid var(--parchment); box-shadow: 0 24px 48px rgba(0,0,0,0.35); transform: rotate(-1.5deg); }
-.hero figcaption { margin-top: 18px; font-size: 0.9rem; color: var(--gold-soft); }
-.memorial { border-top: 1px solid rgba(253,235,207,0.2); padding: 18px 0 22px; font-size: 0.95rem; color: var(--gold-soft); }
-.memorial strong { color: #fff; font-weight: 400; font-family: var(--font-display); font-size: 1.1rem; }
+/* Hero: centered memorial portraits */
+.hero { padding: clamp(40px, 6vw, 72px) 0 clamp(56px, 8vw, 96px); text-align: center; }
+.hero .wrap { display: grid; justify-items: center; gap: 22px; }
+.portraits { display: flex; justify-content: center; gap: clamp(10px, 2vw, 22px); margin-bottom: 8px; }
+.portraits img { width: clamp(150px, 30vw, 330px); aspect-ratio: 464 / 478; object-fit: cover;
+  clip-path: polygon(50% 1%, 99% 26%, 99% 74%, 50% 99%, 1% 74%, 1% 26%); }
+.memory { font-size: 1rem; color: var(--muted); }
+.memory strong { color: var(--navy); font-weight: 700; }
+.hero h1 { max-width: 18ch; }
+.hero h1 span { color: var(--sky-deep); }
+.hero .lead { margin-inline: auto; }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--sky-tint); color: var(--sky-deep); font-size: 0.9rem; font-weight: 500; }
+.chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--sky); }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 999px; background: var(--sky-deep); color: var(--white); text-decoration: none; font-weight: 700; }
+.btn:hover { background: #0369a1; }
+.btn::after { content: "→"; }
 
-/* Ledger of figures */
-.ledger { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--rule); background: #fff; }
-.ledger div { padding: 28px 24px; border-right: 1px solid var(--rule); }
-.ledger div:last-child { border-right: 0; }
-.ledger b { display: block; font-family: var(--font-display); font-weight: 400; font-size: 2.6rem; color: var(--navy); line-height: 1; font-variant-numeric: tabular-nums; }
-.ledger span { display: block; margin-top: 10px; font-size: 0.95rem; color: var(--muted); }
+/* Closing band */
+.band { text-align: center; }
+.band h2 { max-width: 22ch; margin-inline: auto; }
+.band h2 span { color: var(--sky-deep); }
 
-/* Reading layouts */
-.split { display: grid; grid-template-columns: 300px 1fr; gap: clamp(28px, 5vw, 72px); }
-.split > header { display: grid; gap: 16px; align-content: start; }
-.prose { display: grid; gap: 1.1em; max-width: 65ch; }
-.prose .drop::first-letter { font-family: var(--font-display); float: left; font-size: 3.6em; line-height: 0.85; padding: 6px 10px 0 0; color: var(--navy); }
-.quote { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.35; color: var(--navy); border-left: 3px solid var(--gold); padding-left: 20px; }
+/* Gondar project list */
+.commit { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px; }
+.commit .milestone h3 { font-size: 1.05rem; }
 
-.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
-.pair article { background: var(--navy); color: var(--parchment); padding: 32px; border-radius: 6px; display: grid; gap: 12px; align-content: start; }
-.pair article h3 { color: var(--gold); }
+/* Stats */
+.stats { padding: 0; }
+.stats .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.stat { background: var(--white); border: 1px solid var(--line); border-top: 4px solid var(--sky); border-radius: var(--radius); padding: 26px 24px; display: grid; gap: 6px; }
+.stat b { font-family: var(--font-display); font-size: 2.3rem; font-weight: 700; color: var(--navy); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 0.95rem; color: var(--muted); }
 
-.photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
-.photos figure { margin: 0; display: grid; gap: 8px; align-content: start; }
-.photos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
-.photos figcaption { font-size: 0.85rem; color: var(--muted); }
+/* About */
+.about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
+.story { display: grid; gap: 1.1em; max-width: 62ch; color: #2b3150; }
+.cards { display: grid; gap: 16px; }
+.card { border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; display: grid; gap: 10px; }
+.card.navy { background: var(--sky-deep); border-color: var(--sky-deep); color: #f2faff; }
+.card.navy h3 { color: #ffffff; }
 
-.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
-.facts div { border-top: 3px solid var(--gold); padding-top: 12px; }
-.facts b { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; color: var(--navy); display: block; }
-.facts span { font-size: 0.92rem; color: var(--muted); }
+/* Work */
+.work { background: var(--white); }
+.work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
+.work-text { display: grid; gap: 1.1em; color: #2b3150; max-width: 60ch; }
+.goals { display: grid; gap: 12px; }
+.goal { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; }
+.goal i { font-style: normal; width: 40px; height: 40px; border-radius: 12px; background: var(--sky-tint); color: var(--sky-deep); display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; }
+.goal p { color: var(--muted); font-size: 0.95rem; }
 
-/* Timeline */
-.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; max-width: 70ch; }
-.timeline li { display: grid; grid-template-columns: 90px 1fr; gap: 20px; }
-.timeline time { font-family: var(--font-display); font-size: 1.8rem; color: var(--gold); line-height: 1.1; }
-.timeline p + p { margin-top: 8px; }
+/* Photos */
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; }
+.gallery figure { margin: 0; display: grid; gap: 10px; }
+.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
+.gallery figcaption { font-size: 0.88rem; color: var(--muted); }
 
-/* Sponsor */
-.sponsor { background: var(--navy); color: var(--parchment); }
-.sponsor h2 { color: #fff; }
-.sponsor .prose { color: var(--gold-soft); }
-.tiers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
-.tier { background: var(--parchment); color: var(--ink); border-radius: 6px; padding: 30px; display: grid; gap: 10px; align-content: start; }
-.tier .amount { font-family: var(--font-display); font-size: 3rem; color: var(--navy); line-height: 1; font-variant-numeric: tabular-nums; }
-.tier .amount small { font-family: var(--font-body); font-size: 1rem; color: var(--muted); }
-.give { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.give div { border: 1px solid rgba(253,235,207,0.3); border-radius: 6px; padding: 24px; }
-.give h3 { color: var(--gold); font-size: 1.2rem; margin-bottom: 8px; }
-.give address { font-style: normal; }
-.give a { color: #fff; }
+/* Impact */
+.timeline { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.milestone { border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: grid; gap: 12px; align-content: start; }
+.milestone .year { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--sky-deep); background: var(--sky-tint); justify-self: start; padding: 4px 12px; border-radius: 999px; }
+.milestone p { color: #2b3150; }
 
-/* Board */
-.board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 32px; border-top: 1px solid var(--rule); }
-.board div { padding: 20px 20px 20px 0; border-bottom: 1px solid var(--rule); }
-.board b { display: block; font-family: var(--font-display); font-weight: 400; font-size: 1.3rem; color: var(--navy); }
-.board span { font-size: 0.92rem; color: var(--muted); }
-.tag { display: inline-block; margin-top: 4px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); background: var(--gold-soft); padding: 2px 8px; border-radius: 999px; }
+/* Team */
+.team { background: var(--white); }
+.people { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.person { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: grid; grid-template-columns: 48px 1fr; gap: 14px; align-items: center; }
+.avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--sky-tint); color: var(--sky-deep); display: grid; place-items: center; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; }
+.person .avatar { color: var(--sky-deep); font-size: 0.95rem; }
+.person b { display: block; font-family: var(--font-display); font-weight: 600; color: var(--navy); font-size: 1rem; }
+.person span { font-size: 0.9rem; color: var(--muted); }
+.sister { margin-top: 32px; color: var(--muted); max-width: 70ch; }
 
-/* Contact & footer */
-.contact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
-.contact div { display: grid; gap: 6px; align-content: start; }
-.contact h3 { font-size: 1.15rem; }
-.contact address { font-style: normal; }
-footer { background: var(--navy-deep); color: var(--gold-soft); padding: 32px 0; font-size: 0.9rem; }
-footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between; align-items: center; }
-footer b { color: #fff; font-weight: 400; font-family: var(--font-display); font-size: 1.05rem; }
+/* Contact */
+.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.contact-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; display: grid; gap: 8px; align-content: start; }
+.contact-card .label { color: var(--muted); }
+.contact-card address, .contact-card p { font-style: normal; font-size: 1.05rem; }
+.contact-card a { text-decoration: none; font-weight: 500; }
+.contact-card a:hover { text-decoration: underline; }
+
+footer { border-top: 1px solid var(--line); padding: 28px 0; font-size: 0.9rem; color: var(--muted); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; }
+footer .brand img { width: 32px; height: 32px; }
+footer .brand span { font-size: 0.95rem; }
 
 @media (max-width: 900px) {
-  .hero, .split, .pair, .tiers, .give { grid-template-columns: 1fr; }
-  .ledger { grid-template-columns: repeat(2, 1fr); }
-  .ledger div:nth-child(2) { border-right: 0; }
-  .ledger div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
-  .photos, .facts, .board, .contact { grid-template-columns: repeat(2, 1fr); }
+  .about-grid, .work-grid, .timeline { grid-template-columns: 1fr; }
+  .commit { grid-template-columns: repeat(2, 1fr); }
+  .stats .wrap { grid-template-columns: repeat(2, 1fr); }
+  .gallery, .people, .contact-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 520px) {
-  .photos, .facts, .board, .contact, .ledger { grid-template-columns: 1fr; }
-  .ledger div { border-right: 0; border-bottom: 1px solid var(--rule); }
-  .timeline li { grid-template-columns: 1fr; gap: 4px; }
-  .nav ul { gap: 6px 16px; }
+@media (max-width: 560px) {
+  .stats .wrap, .gallery, .people, .contact-grid, .commit { grid-template-columns: 1fr; }
+  .nav ul a { padding: 6px 10px; font-size: 0.9rem; }
 }
+
+/* Original theme */
+body { background: var(--parchment); }
+h1, h2, h3 { font-weight: 400; letter-spacing: 0; }
+h1 { font-weight: 400; }
+h3 { font-size: 1.3rem; }
+.label { font-family: var(--font-body); font-weight: 700; letter-spacing: 0.14em; color: var(--gold); display: flex; align-items: center; gap: 10px; }
+.label::before { content: ""; width: 28px; height: 2px; background: currentColor; }
+.contact-card .label { color: var(--gold); }
+.site-header { background: var(--navy); border-bottom: 1px solid rgba(253,235,207,0.15); backdrop-filter: none; }
+.brand span { color: var(--parchment); font-weight: 400; font-size: 1.2rem; }
+.nav ul a { color: var(--parchment); }
+.nav ul a:hover { background: rgba(255,255,255,0.08); color: var(--gold); }
+.hero { background: var(--navy); }
+.hero h1 { color: #ffffff; }
+.hero h1 span { color: var(--gold); }
+.hero .lead { color: var(--gold-soft); }
+.memory { color: var(--gold-soft); }
+.memory strong { color: #ffffff; font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; }
+.btn { background: var(--gold); color: var(--navy-deep); }
+.btn:hover { background: var(--gold-soft); }
+.stats { padding-top: 44px; }
+.stat { background: var(--white); border-color: var(--line); border-top: 4px solid var(--gold); }
+.stat b { font-weight: 400; letter-spacing: 0; }
+.card { background: var(--white); }
+.card.navy { background: var(--navy); border-color: var(--navy); color: var(--parchment); }
+.card.navy h3 { color: var(--gold); }
+.work, .team { background: transparent; }
+.goal i { background: var(--gold-soft); color: var(--navy); font-weight: 400; }
+.milestone { background: var(--white); }
+.milestone .year { background: var(--gold-soft); color: var(--navy); font-weight: 400; }
+.person b { font-weight: 400; font-size: 1.1rem; }
+.avatar, .person .avatar { background: var(--navy); color: var(--gold); font-weight: 400; }
+.contact-card { background: var(--white); }
+.band { background: var(--navy); }
+.band h2 { color: #ffffff; }
+.band h2 span { color: var(--gold); }
+footer { background: var(--navy-deep); color: var(--gold-soft); border-top: 0; }
+footer .brand span { color: #ffffff; }
 </style>
 </head>
 <body>
 
-<header class="masthead">
+<header class="site-header">
   <div class="wrap">
     <nav class="nav" aria-label="Main">
-      <a class="brand" href="#top" id="top">
-        <img src="img/logo.png" alt="BCE Foundation for Kids logo: a gold butterfly on a navy circle">
-        <span>BCE Foundation<small>for Kids</small></span>
+      <a class="brand" href="#top">
+        <img src="img/logo.png" alt="BCE Foundation for Kids logo">
+        <span>BCE Foundation for Kids</span>
       </a>
       <ul>
-        <li><a href="#story">Our story</a></li>
-        <li><a href="#project">Our work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Our work</a></li>
         <li><a href="#impact">Impact</a></li>
-        <li><a href="#board">Board</a></li>
+        <li><a href="#team">Team</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a class="donate" href="#sponsor">Sponsor a child</a></li>
       </ul>
     </nav>
-
-    <div class="hero">
-      <div>
-        <p class="eyebrow">Gondar, Ethiopia</p>
-        <h1 style="margin-top:18px">Education is not a luxury. It is <em>every child's right.</em></h1>
-        <p class="lede">We provide school supplies, uniforms, meals and safer school facilities for children at Atse-Fasil public elementary school.</p>
-        <div class="actions">
-          <a class="btn btn-gold" href="#sponsor">Sponsor a child</a>
-          <a class="btn btn-line" href="#story">Read our story</a>
-        </div>
-      </div>
-      <figure>
-        <img src="img/school-supplies.jpg" alt="Students at Atse-Fasil school lined up holding their new backpacks from BCE Foundation" width="624" height="348">
-        <figcaption>Students receiving backpacks and school supplies, 2018.</figcaption>
-      </figure>
-    </div>
-
-    <p class="memorial">In loving memory of <strong>Blen, Christian and Emnet</strong></p>
   </div>
 </header>
 
-<section class="ledger" aria-label="Our reach at a glance">
-  <div><b>3,600</b><span>students, kindergarten to 8th grade, at the school we serve</span></div>
-  <div><b>153</b><span>children given backpacks and school supplies in 2018</span></div>
-  <div><b>130</b><span>children from struggling families given free breakfast</span></div>
-  <div><b>2020</b><span>child-friendly water supply lines and reservoir built</span></div>
+<main id="top">
+
+<section class="hero" aria-label="Introduction">
+  <div class="wrap">
+    <div class="portraits">
+      <img src="img/kids-1.jpg" alt="Portrait of the BCE children, smiling in front of a blossoming tree" width="464" height="478">
+      <img src="img/kids-2.jpg" alt="Portrait of the BCE children, smiling side by side" width="464" height="478">
+    </div>
+    <p class="memory">In loving memory of <strong>Blen, Christian and Emnet</strong></p>
+    <h1>Say "Yes!" to a brighter future for <span>every child.</span></h1>
+    <p class="lead">The BCE Foundation for Kids expands access to quality education for poor, vulnerable and neglected children in Ethiopia, so every child can thrive and reach their full potential.</p>
+    <a class="btn" href="#work">See our work</a>
+  </div>
 </section>
 
-<main>
+<section class="stats" aria-label="At a glance">
+  <div class="wrap">
+    <div class="stat"><b>3,600</b><span>students at the school we serve, kindergarten to 8th grade</span></div>
+    <div class="stat"><b>153</b><span>children given backpacks and school supplies</span></div>
+    <div class="stat"><b>130</b><span>children given free breakfast</span></div>
+    <div class="stat"><b>2020</b><span>clean water lines and reservoir built for the school</span></div>
+  </div>
+</section>
 
-<section class="section" id="story">
-  <div class="wrap split">
-    <header>
-      <p class="eyebrow">Our story</p>
-      <h2>A new beginning, in the place where it all started</h2>
-    </header>
-    <div class="prose">
-      <p class="drop">Our story begins, a couple of times, in Ethiopia. The first beginning was the chance meeting of an academic and a nurse. They married, had a joyful baby girl, and soon had to live in different countries. Dad worked in Ethiopia while their daughter grew up nearby, cherished by her grandparents. Mom worked in the USA, raising a son as a single parent. For nearly a decade they made do with infrequent visits, until dad and daughter could join mom and son in the USA. When dad got off the plane, his son looked at him and said, "I thought dads were taller."</p>
-      <p>The family adjusted to life together and grew, welcoming a third child. This family of five was full of all the joy, laughter and everyday frustrations that come with being a family.</p>
-      <p>Then a single event took all three of their children from this world into the next, and left their parents in a sea of grief. Through it, they were surrounded by community: first strangers, then friends and family. In their grief they traveled back to Ethiopia, to where their first story started, and began a new one. A story that seeks to create hope in the darkness.</p>
-      <p class="quote">Solomon and Meseret now offer a future, the future no longer available to their own children, to the vulnerable and neglected children of the world.</p>
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="label">About us</p>
+      <h2>Hope that grew out of loss</h2>
+    </div>
+    <div class="about-grid">
+      <div class="story">
+        <p>Our founders, Solomon and Meseret, met in Ethiopia and built a family of five, with a daughter, a son and a baby. A single tragic event took all three of their children, Blen, Christian and Emnet.</p>
+        <p>In their grief, surrounded by friends, family and community, they returned to Ethiopia, where their story began, and started a new one. Through the BCE Foundation for Kids, they offer the future that is no longer possible for their own children to vulnerable and neglected children in Ethiopia.</p>
+      </div>
+      <div class="cards">
+        <div class="card navy">
+          <h3>Our mission</h3>
+          <p>The BCE Foundation for Kids is a 501(c)(3) nonprofit committed to providing access to education for poor, vulnerable and neglected children in Ethiopia. We cultivate lifelong learning in a clean, safe and nurturing environment to help children realize their full potential.</p>
+        </div>
+        <div class="card">
+          <h3>Our vision</h3>
+          <p>A world where every child, regardless of income, has equal access to education, because education is a human right, not a luxury.</p>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="wrap pair">
-    <article>
-      <h3>Our mission</h3>
-      <p>The BCE Foundation for Kids was formed in honor and memory of Blen, Christian and Emnet. We are committed to providing access to education for vulnerable and neglected children living in poverty. We seek to cultivate lifelong learning in a clean, safe and nurturing environment, by improving educational infrastructure and providing educational materials and supplies.</p>
-    </article>
-    <article>
-      <h3>Our vision</h3>
-      <p>A global community where all children, regardless of socioeconomic status, have equal access to education. Inspired by Blen, Christian and Emnet, we envision a prosperous Ethiopia where all children and youth have meaningful opportunities to grow and learn, in communities that offer quality education and a better future.</p>
-    </article>
-  </div>
 </section>
 
-<section class="section" id="project">
-  <div class="wrap split">
-    <header>
-      <p class="eyebrow">Current project</p>
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="label">Current project</p>
       <h2>Atse-Fasil public elementary school</h2>
-    </header>
-    <div class="prose">
-      <p>Gondar, in northwest Ethiopia, is home to around a quarter of a million people. In 2018, BCE's founding members began working with Atse-Fasil public elementary school, named after Emperor Fasilides, who ruled Ethiopia from 1632 to 1667. On the outskirts of the city, it is one of the oldest schools in the Amhara region, and it serves 3,600 students from kindergarten to 8th grade.</p>
-      <p>Although the school is publicly funded, students must buy their own notebooks, pencils, backpacks and uniforms. Many children are so poor that they spend the school day hungry. Classrooms are so crowded and understaffed that teachers rotate groups of students between recess and instruction throughout the day. The library and laboratory are too small for the materials students need, and the buildings are crumbling.</p>
-      <div class="facts" aria-label="Next goals">
-        <div><b>Supplies</b><span>Reach more children with school supplies</span></div>
-        <div><b>Sponsorship</b><span>Support children in extreme financial need</span></div>
-        <div><b>Rebuilding</b><span>Replace and expand the library, laboratory, classrooms and offices, and fund staff development</span></div>
+    </div>
+    <div class="work-grid">
+      <div class="work-text">
+        <p>Since 2018 we have worked with Atse-Fasil, one of the oldest schools in Ethiopia's Amhara region, on the outskirts of Gondar. It serves 3,600 students from kindergarten to 8th grade.</p>
+        <p>Families must pay for notebooks, pencils, backpacks and uniforms, and many children spend the school day hungry. Classrooms are crowded and understaffed, the library and laboratory are too small, and the buildings are aging.</p>
+      </div>
+      <div class="goals">
+        <p class="label">Future goals</p>
+        <div class="goal"><i>1</i><div><h3>Better facilities</h3><p>Improved facilities, laboratory and office spaces.</p></div></div>
+        <div class="goal"><i>2</i><div><h3>Science labs</h3><p>New, modern science labs for hands-on learning.</p></div></div>
+        <div class="goal"><i>3</i><div><h3>Classrooms and staff</h3><p>More classrooms, and development for teachers and administrative staff.</p></div></div>
       </div>
     </div>
-  </div>
-  <div class="wrap photos">
-    <figure><img src="img/class-2.jpg" alt="A crowded classroom of students in uniform at Atse-Fasil school" loading="lazy"><figcaption>Students during class.</figcaption></figure>
-    <figure><img src="img/class-1.jpg" alt="Students seated at shared wooden desks, a teacher standing at the back" loading="lazy"><figcaption>Classrooms are crowded and understaffed.</figcaption></figure>
-    <figure><img src="img/uniforms.jpg" style="object-position: center top" alt="Young students lining up to be measured for school uniforms" loading="lazy"><figcaption>Measuring students for school uniforms.</figcaption></figure>
-  </div>
-</section>
-
-<section class="section" id="impact">
-  <div class="wrap split">
-    <header>
-      <p class="eyebrow">Impact so far</p>
-      <h2>What your support has built</h2>
-    </header>
-    <ol class="timeline">
-      <li>
-        <time datetime="2018-09">2018</time>
-        <div>
-          <p><strong>School supplies, uniforms and meals.</strong> BCE raised funds and provided 153 children with backpacks and school supplies, uniforms for 70 children, lunch benches for 100 kindergarteners, and free breakfast for 130 children from struggling families.</p>
-        </div>
-      </li>
-      <li>
-        <time datetime="2020">2020</time>
-        <div>
-          <p><strong>Clean water at school.</strong> BCE built child-friendly water supply lines and a water reservoir for the school.</p>
-        </div>
-      </li>
-    </ol>
-  </div>
-  <div class="wrap photos">
-    <figure><img src="img/handwashing.jpg" alt="Kindergartners gathered outdoors to wash their hands before lunch" loading="lazy"><figcaption>Kindergartners washing their hands for lunch.</figcaption></figure>
-    <figure><img src="img/lunch.jpg" alt="Young children sitting on a mat with backpacks and water bottles during lunch" loading="lazy"><figcaption>Lunch break.</figcaption></figure>
-    <figure><img src="img/school-supplies.jpg" alt="Students holding new backpacks provided by BCE Foundation" loading="lazy"><figcaption>New backpacks and supplies, 2018.</figcaption></figure>
-  </div>
-</section>
-
-<section class="section sponsor" id="sponsor">
-  <div class="wrap split">
-    <header>
-      <p class="eyebrow">Sponsor a child</p>
-      <h2>A small gift changes a whole school year</h2>
-    </header>
-    <div class="prose">
-      <p>Children across Ethiopia face challenges that keep them in poverty: early marriage, child labor, conflict, drought and war. When you sponsor a child with BCE Foundation, you help a girl or a boy with incredible potential get an education and break the cycle of poverty, and you bring hope to their whole community.</p>
-      <p>Sponsors can exchange letters, photos and gifts with their child. If you would like to visit, we are happy to arrange for you to meet your sponsored child, their family and their school.</p>
-    </div>
-  </div>
-  <div class="wrap tiers">
-    <div class="tier">
-      <p class="amount">$35–50</p>
-      <h3>School supplies for a year</h3>
-      <p>Covers one child's notebooks, pencils and supplies for a full academic year.</p>
-    </div>
-    <div class="tier">
-      <p class="amount">$30<small> / month</small></p>
-      <h3>Full sponsorship</h3>
-      <p>Makes sure a child's basic needs are met and covers the cost of their school supplies.</p>
-    </div>
-  </div>
-  <div class="wrap give">
-    <div>
-      <h3>Give by mail</h3>
-      <p>Make checks payable to BCE Foundation and send to:</p>
-      <address>BCE Foundation<br>PO Box 4814<br>Spokane, WA 99220, USA</address>
-    </div>
-    <div>
-      <h3>Start a sponsorship</h3>
-      <p>Call or email us and we'll match you with a child.</p>
-      <p><a href="tel:+15092634896">(509) 263-4896</a><br><a href="mailto:bcefoundationforkids@gmail.com">bcefoundationforkids@gmail.com</a></p>
+    <div class="gallery">
+      <figure><img src="img/class-2.jpg" alt="A full classroom of students in uniform" loading="lazy"><figcaption>Students during class</figcaption></figure>
+      <figure><img src="img/class-1.jpg" alt="Students seated at shared wooden desks" loading="lazy"><figcaption>Crowded classrooms</figcaption></figure>
+      <figure><img src="img/uniforms.jpg" style="object-position: center top" alt="Young students being measured for school uniforms" loading="lazy"><figcaption>Measuring for school uniforms</figcaption></figure>
     </div>
   </div>
 </section>
 
-<section class="section" id="board">
+<section id="impact">
   <div class="wrap">
-    <p class="eyebrow">Founders and board</p>
-    <h2 style="margin-top:16px">The people behind BCE</h2>
-    <div class="board">
-      <div><b>Dr. Solomon Agere</b><span>Executive Director</span><br><span class="tag">Founder</span></div>
-      <div><b>Meseret Shiferaw</b><span>Treasurer</span><br><span class="tag">Founder</span></div>
-      <div><b>Dr. Yedesdes Shiferaw</b><span>Assistant Director</span></div>
-      <div><b>Gita George-Hatcher</b><span>Secretary</span></div>
-      <div><b>Dr. Caleb Tadesse</b><span>Board Member</span></div>
-      <div><b>Dr. Getnet Alebachew</b><span>Board Member</span></div>
+    <div class="section-head">
+      <p class="label">Our commitment in action</p>
+      <h2>The Gondar project</h2>
     </div>
-    <p style="margin-top:28px; max-width:65ch; color:var(--muted)">BCE Foundation is a legally incorporated nonprofit in the United States and works with a sister institution in Ethiopia, the Blen, Christian, Emnet and Hermela Foundation. Both focus on educational programs in Gondar.</p>
+    <div class="commit">
+      <article class="milestone"><span class="year">Infrastructure</span><h3>Support for Atse-Fasil Elementary</h3><p>Benches and essential infrastructure, including lunch benches for 100 kindergarteners.</p></article>
+      <article class="milestone"><span class="year">Supplies</span><h3>Complete supplies and backpacks</h3><p>Equipped multiple classrooms of students, starting with 153 children in 2018.</p></article>
+      <article class="milestone"><span class="year">Uniforms</span><h3>Full school uniforms</h3><p>Dressed an entire class, giving students pride and identity.</p></article>
+      <article class="milestone"><span class="year">Nutrition</span><h3>Early learning breakfast initiative</h3><p>Free breakfast for 130 children from struggling families.</p></article>
+    </div>
+    <div class="timeline">
+      <article class="milestone">
+        <span class="year">2020</span>
+        <h3>Clean water at school</h3>
+        <p>Child-friendly water supply lines and a water reservoir built for the school.</p>
+      </article>
+      <article class="milestone">
+        <span class="year">Today</span>
+        <h3>Students we support</h3>
+        <p>Children at Atse-Fasil receive supplies, uniforms and meals so they can focus on learning.</p>
+      </article>
+    </div>
+    <div class="gallery">
+      <figure><img src="img/students-bags.jpg" alt="Students in red and white uniforms holding bags of school supplies" loading="lazy"><figcaption>Students with their new school supplies</figcaption></figure>
+      <figure><img src="img/three-girls.jpg" alt="Three smiling schoolgirls, one holding a new backpack" loading="lazy"><figcaption>Ready for the school year</figcaption></figure>
+      <figure><img src="img/students-uniforms.jpg" alt="A row of students in green and white school uniforms" loading="lazy"><figcaption>Students in their school uniforms</figcaption></figure>
+      <figure><img src="img/handwashing.jpg" alt="Kindergartners washing their hands before lunch" loading="lazy"><figcaption>Handwashing before lunch</figcaption></figure>
+      <figure><img src="img/lunch.jpg" alt="Young children sitting together during lunch break" loading="lazy"><figcaption>Lunch break</figcaption></figure>
+      <figure><img src="img/school-supplies.jpg" alt="Students holding new backpacks" loading="lazy"><figcaption>New backpacks, 2018</figcaption></figure>
+    </div>
   </div>
 </section>
 
-<section class="section" id="contact">
+<section class="team" id="team">
   <div class="wrap">
-    <p class="eyebrow">Contact us</p>
-    <h2 style="margin-top:16px">Get in touch</h2>
-    <div class="contact">
-      <div>
-        <h3>Head office and mailing address</h3>
-        <address>BCE Foundation<br>PO Box 4814<br>Spokane, WA 99220<br>United States</address>
+    <div class="section-head">
+      <p class="label">Our team</p>
+      <h2>Founders and board</h2>
+    </div>
+    <div class="people">
+      <div class="person"><span class="avatar" aria-hidden="true">SA</span><div><b>Dr. Solomon Agere</b><span>Founder, Executive Director</span></div></div>
+      <div class="person"><span class="avatar" aria-hidden="true">MS</span><div><b>Meseret Shiferaw</b><span>Founder, Treasurer</span></div></div>
+      <div class="person"><span class="avatar" aria-hidden="true">YS</span><div><b>Dr. Yedesdes Shiferaw</b><span>Assistant Director</span></div></div>
+      <div class="person"><span class="avatar" aria-hidden="true">GH</span><div><b>Gita George-Hatcher</b><span>Secretary</span></div></div>
+      <div class="person"><span class="avatar" aria-hidden="true">CT</span><div><b>Dr. Caleb Tadesse</b><span>Board Member</span></div></div>
+      <div class="person"><span class="avatar" aria-hidden="true">GA</span><div><b>Dr. Getnet Alebachew</b><span>Board Member</span></div></div>
+    </div>
+    <p class="sister">We work with our sister organization in Ethiopia, the Blen, Christian, Emnet and Hermela Foundation. Both focus on educational programs in Gondar.</p>
+  </div>
+</section>
+
+<section class="band" aria-label="Our message">
+  <div class="wrap">
+    <h2>Say "Yes!" to learning, hope and <span>opportunity.</span></h2>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="label">Contact</p>
+      <h2>Get in touch</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <p class="label">Mail</p>
+        <address>BCE Foundation<br>PO Box 4814<br>Spokane, WA 99220</address>
       </div>
-      <div>
-        <h3>Donations by mail</h3>
-        <p>Make checks payable to BCE Foundation and send them to our PO Box.</p>
-      </div>
-      <div>
-        <h3>Phone and email</h3>
+      <div class="contact-card">
+        <p class="label">Phone</p>
         <p><a href="tel:+15092634896">(509) 263-4896</a></p>
+      </div>
+      <div class="contact-card">
+        <p class="label">Email</p>
         <p><a href="mailto:bcefoundationforkids@gmail.com">bcefoundationforkids@gmail.com</a></p>
+        <p class="label" style="margin-top:10px">Follow us</p>
         <p>@BCEFoundationForKids</p>
       </div>
     </div>
@@ -365,8 +380,8 @@ footer b { color: #fff; font-weight: 400; font-family: var(--font-display); font
 
 <footer>
   <div class="wrap">
-    <p><b>Blen, Christian and Emnet Foundation</b><br>A 501(c)(3) nonprofit organization. EIN 84-2153155.</p>
-    <p>Donations are tax-deductible to the fullest extent of the law.</p>
+    <a class="brand" href="#top"><img src="img/logo.png" alt=""><span>Blen, Christian and Emnet Foundation</span></a>
+    <p>501(c)(3) nonprofit · EIN 84-2153155 · Spokane, Washington</p>
   </div>
 </footer>
 
